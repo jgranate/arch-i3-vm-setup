@@ -52,6 +52,28 @@ sudo systemctl enable vmtoolsd.service
 echo "==> Enabling LightDM display manager..."
 sudo systemctl enable lightdm.service
 
+echo "==> Applying WirePlumber stutter fix..."
+mkdir -p ~/.config/wireplumber/wireplumber.conf.d
+cat > ~/.config/wireplumber/wireplumber.conf.d/50-alsa-config.conf <<EOF
+monitor.alsa.rules = [
+  {
+    matches = [
+      {
+        node.name = "~alsa_output.*"
+      }
+    ]
+    actions = {
+      update-props = {
+        api.alsa.period-size = 1024
+        api.alsa.headroom = 8192
+      }
+    }
+  }
+]
+EOF
+
+echo "==> Restarting PipeWire services..."
+systemctl --user restart wireplumber pipewire pipewire-pulse || true
 
 
 echo "==> Setup complete. Run 'startx' to enter i3."
