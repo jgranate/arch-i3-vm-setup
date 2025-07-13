@@ -5,22 +5,25 @@ echo "==> Syncing time and updating system..."
 sudo timedatectl set-ntp true
 sudo pacman -Syu --noconfirm
 
-echo "==> Installing base packages..."
-sudo pacman -S --needed --noconfirm $(< packages.txt)
+echo "==> Installing base packages from packages.txt..."
+# Make sure yay is not in the package list
+grep -v '^yay$' packages.txt | xargs sudo pacman -S --needed --noconfirm
 
 # === Install yay if not present ===
 if ! command -v yay &>/dev/null; then
   echo "==> Installing yay from AUR..."
   sudo pacman -S --needed --noconfirm git base-devel
 
-  # Run as the current user, not root
   tmpdir=$(mktemp -d)
   git clone https://aur.archlinux.org/yay.git "$tmpdir/yay"
   cd "$tmpdir/yay"
   makepkg -si --noconfirm
+  cd -
+  rm -rf "$tmpdir"
 fi
 
 echo "==> Copying dotfiles..."
+mkdir -p ~/.config
 cp -r dotfiles/.config/* ~/.config/
 cp dotfiles/.xinitrc ~/
 
@@ -48,4 +51,4 @@ feh --bg-scale ~/.config/wallpapers/beautiful-mountains.jpg
 echo "==> Enabling VMware tools..."
 sudo systemctl enable vmtoolsd.service
 
-echo "==> Setup complete. Start i3 with 'startx' or login via display manager."
+echo "==> Setup complete. Run 'startx' to enter i3."
