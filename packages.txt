@@ -33,3 +33,5 @@ i3status
 dmenu
 rofi
 polybar
+lightdm
+lightdm-gtk-greeter

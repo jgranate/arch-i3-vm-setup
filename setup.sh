@@ -53,5 +53,9 @@ feh --bg-scale ~/.config/wallpapers/beautiful-mountains.jpg
 
 echo "==> Enabling VMware tools..."
 sudo systemctl enable vmtoolsd.service
+echo "==> Enabling LightDM display manager..."
+sudo systemctl enable lightdm.service
+
+
 
 echo "==> Setup complete. Run 'startx' to enter i3."
