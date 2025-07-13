@@ -38,12 +38,15 @@ cp dotfiles/.config/scripts/set-resolution.sh ~/.config/scripts/
 chmod +x ~/.config/scripts/set-resolution.sh
 
 echo "==> Installing Rofi themes..."
+git clone https://github.com/lr-tech/rofi-themes-collection.git /tmp/rofi-themes-collection
 mkdir -p ~/.local/share/rofi/themes
-cp themes/*.rasi ~/.local/share/rofi/themes/
+cp /tmp/rofi-themes-collection/themes/*.rasi ~/.local/share/rofi/themes/
 
 echo "==> Applying default Rofi theme..."
 mkdir -p ~/.config/rofi
 echo '@import "~/.local/share/rofi/themes/nord.rasi"' > ~/.config/rofi/config.rasi
+rm -rf /tmp/rofi-themes-collection
+
 
 echo "==> Setting wallpaper..."
 feh --bg-scale ~/.config/wallpapers/beautiful-mountains.jpg
