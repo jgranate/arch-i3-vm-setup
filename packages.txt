@@ -35,3 +35,8 @@ rofi
 polybar
 lightdm
 lightdm-gtk-greeter
+pipewire
+pipewire-alsa
+pipewire-pulse
+pipewire-jack
+wireplumber
