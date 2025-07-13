@@ -24,3 +24,12 @@ xorg-xinit
 xorg-xinput
 yay
 zram-generator
+xorg-server
+xorg-xinit
+xorg-xrandr
+xorg-xsetroot
+i3-wm
+i3status
+dmenu
+rofi
+polybar
