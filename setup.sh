@@ -10,13 +10,14 @@ sudo pacman -S --needed --noconfirm $(< packages.txt)
 
 # === Install yay if not present ===
 if ! command -v yay &>/dev/null; then
-  echo "==> Installing yay..."
-  cd /tmp
+  echo "==> Installing yay from AUR..."
   sudo pacman -S --needed --noconfirm git base-devel
+  cd /tmp
   git clone https://aur.archlinux.org/yay.git
   cd yay
   makepkg -si --noconfirm
 fi
+
 
 echo "==> Copying dotfiles..."
 cp -r dotfiles/.config/* ~/.config/
