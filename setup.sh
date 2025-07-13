@@ -47,10 +47,6 @@ mkdir -p ~/.config/rofi
 echo '@import "~/.local/share/rofi/themes/nord.rasi"' > ~/.config/rofi/config.rasi
 rm -rf /tmp/rofi-themes-collection
 
-
-echo "==> Setting wallpaper..."
-feh --bg-scale ~/.config/wallpapers/beautiful-mountains.jpg
-
 echo "==> Enabling VMware tools..."
 sudo systemctl enable vmtoolsd.service
 echo "==> Enabling LightDM display manager..."
