@@ -12,12 +12,13 @@ sudo pacman -S --needed --noconfirm $(< packages.txt)
 if ! command -v yay &>/dev/null; then
   echo "==> Installing yay from AUR..."
   sudo pacman -S --needed --noconfirm git base-devel
-  cd /tmp
-  git clone https://aur.archlinux.org/yay.git
-  cd yay
+
+  # Run as the current user, not root
+  tmpdir=$(mktemp -d)
+  git clone https://aur.archlinux.org/yay.git "$tmpdir/yay"
+  cd "$tmpdir/yay"
   makepkg -si --noconfirm
 fi
-
 
 echo "==> Copying dotfiles..."
 cp -r dotfiles/.config/* ~/.config/
